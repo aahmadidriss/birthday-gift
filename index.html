@@ -7,135 +7,163 @@
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
     body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+      font-family: 'Pacifico', cursive;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+      background-size: 400% 400%;
+      animation: gradientShift 10s ease infinite;
       overflow: hidden;
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      background-image: 
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.2) 2%, transparent 0),
-        radial-gradient(circle at 80% 40%, rgba(255,255,255,0.15) 2%, transparent 0),
-        radial-gradient(circle at 50% 70%, rgba(255,255,255,0.1) 2%, transparent 0);
-      background-size: 80px 80px;
+    }
+
+    @keyframes gradientShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    .container {
+      z-index: 2;
+    }
+
+    img {
+      max-width: 300px;
+      max-height: 300px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
     }
 
     h1 {
-      color: #fff;
-      font-family: 'Pacifico', cursive;
-      font-size: 3em;
-      text-shadow: 3px 3px 8px rgba(0,0,0,0.3);
-      margin-bottom: 15px;
-      animation: bounce 2s infinite;
-    }
-
-    .card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 25px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .slideshow {
-      position: relative;
-      width: 300px;
-      height: 300px;
-    }
-
-    .slideshow img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 20px;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    .slideshow img.active {
-      opacity: 1;
-    }
-
-    .btn {
       margin-top: 20px;
-      padding: 12px 28px;
-      background: linear-gradient(45deg, #ff4081, #ff80ab);
-      color: white;
-      font-size: 16px;
+      font-size: 3rem;
+      text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493, 0 0 40px #ff69b4;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #fff, 0 0 15px #ff69b4, 0 0 30px #ff1493; }
+      to { text-shadow: 0 0 20px #fff, 0 0 40px #ff69b4, 0 0 60px #ff1493; }
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      font-size: 1.2rem;
       font-weight: bold;
       border: none;
-      border-radius: 30px;
+      border-radius: 25px;
       cursor: pointer;
-      transition: transform 0.2s, background 0.3s;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      background: linear-gradient(45deg, #ff1493, #ff69b4);
+      color: white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.1);
     }
 
-    .btn:hover {
-      transform: scale(1.05);
-      background: linear-gradient(45deg, #e91e63, #f48fb1);
-    }
+    audio { display: none; }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    audio {
+    /* Popup Ucapan */
+    .modal {
       display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+      color: #333;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      position: relative;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    .modal-content h2 {
+      margin: 0 0 15px;
+      color: #ff1493;
+      font-size: 2rem;
+    }
+    .modal-content p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+      color: #222;
+    }
+    .close {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      background: #ff1493;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+    .close:hover {
+      background: #ff69b4;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
     }
   </style>
 </head>
 <body>
-  <h1>Happy Birthday Wildah 🎂🥳</h1>
-
-  <div class="card">
-    <div class="slideshow">
-      <img src="img/foto1.jpg" class="active">
-      <img src="img/foto2.jpg">
-      <img src="img/foto3.jpg">
-      <img src="img/foto4.jpg">
-    </div>
-    <button class="btn" onclick="showMessage()">💌 Buka Ucapan</button>
+  <div class="container">
+    <img src="foto1.jpg" alt="Foto Spesial">
+    <h1>🎂 HAPPY BIRTHDAY WILDAH 🥳</h1>
+    <button onclick="openModal()">💌 Lihat Ucapan</button>
+    <audio autoplay loop>
+      <source src="music/lagu.mp3" type="audio/mpeg">
+      Browser tidak mendukung audio.
+    </audio>
   </div>
 
-  <audio autoplay loop>
-    <source src="music/lagu.mp3" type="audio/mpeg">
-    Browser kamu tidak mendukung audio tag.
-  </audio>
+  <!-- Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <h2>Untukmu 💖</h2>
+      <p>Selamat ulang tahun Wildah! 🥰  
+         Semoga panjang umur, sehat selalu, bahagia terus,  
+         dan semua harapannya tercapai 💕✨.</p>
+      <button class="close" onclick="closeModal()">Tutup</button>
+    </div>
+  </div>
 
   <!-- Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
-    // Slideshow
-    const images = document.querySelectorAll(".slideshow img");
-    let index = 0;
-    setInterval(() => {
-      images[index].classList.remove("active");
-      index = (index + 1) % images.length;
-      images[index].classList.add("active");
-    }, 3000);
-
-    // Confetti tiap 3 detik
     function randomConfetti() {
       confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 }
+        particleCount: 120,
+        spread: 90,
+        origin: { y: 0.6 },
+        colors: ['#ff0', '#ff69b4', '#00f', '#0f0', '#ffa500']
       });
     }
-    setInterval(randomConfetti, 3000);
+    setInterval(randomConfetti, 2500);
 
-    // Popup ucapan
-    function showMessage() {
-      alert("Selamat Ulang Tahun Wildah 🎉🎂\nSemoga selalu sehat, panjang umur, banyak rezeki, dan semakin bahagia 💖✨");
+    function openModal() {
+      document.getElementById("myModal").style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById("myModal").style.display = "none";
     }
   </script>
 </body>
