@@ -30,13 +30,16 @@
     .container {
       z-index: 2;
       position: relative;
+      display: flex;
+      flex-direction: column; /* susun isi ke bawah */
+      align-items: center;
+      justify-content: center;
     }
 
     .slideshow {
       position: relative;
       width: 320px;
       height: 320px;
-      margin: 0 auto;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 10px 25px rgba(0,0,0,0.4);
@@ -143,14 +146,23 @@
   </style>
 </head>
 <body>
-  <div class="slideshow">
-  <img src="img/foto1.jpg" class="active">
-  <img src="img/foto2.jpg">
-  <img src="img/foto3.jpg">
-  <img src="img/foto4.jpg">
-  </div>
+  <div class="container">
+    <!-- Slideshow -->
+    <div class="slideshow">
+      <img src="img/foto1.jpg" class="active">
+      <img src="img/foto2.jpg">
+      <img src="img/foto3.jpg">
+      <img src="img/foto4.jpg">
+      <img src="img/foto5.jpg">
+    </div>
+
+    <!-- Title -->
     <h1>🎂 HAPPY BIRTHDAY WILDAH 🥳</h1>
+
+    <!-- Button -->
     <button onclick="openModal()">💌 Lihat Ucapan</button>
+
+    <!-- Music -->
     <audio id="bg-music" autoplay loop>
       <source src="music/lagu.mp3" type="audio/mpeg">
       Browser tidak mendukung audio.
