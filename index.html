@@ -10,7 +10,7 @@
       margin: 0;
       height: 100vh;
       display: flex;
-      flex-direction: column; /* isi body tersusun vertikal */
+      flex-direction: column; 
       justify-content: center;
       align-items: center;
       text-align: center;
@@ -32,7 +32,7 @@
       z-index: 2;
       position: relative;
       display: flex;
-      flex-direction: column; /* isi container ke bawah */
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
@@ -125,7 +125,7 @@
     }
     .modal-content p {
       font-size: 1.1rem;
-      line-height: 1.5;
+      line-height: 1.6;
       color: #222;
     }
     .close {
@@ -151,10 +151,11 @@
 <body>
   <div class="container">
     <div class="slideshow">
-      <img src="foto1.jpg" class="active">
-      <img src="foto2.jpg">
-      <img src="foto3.jpg">
-      <img src="foto4.jpg">
+      <img src="img/foto1.jpg" class="active">
+      <img src="img/foto2.jpg">
+      <img src="img/foto3.jpg">
+      <img src="img/foto4.jpg">
+      <img src="img/foto5.jpg">
     </div>
     <h1>🎂 HAPPY BIRTHDAY WILDAH 🥳</h1>
     <button onclick="openModal()">💌 Lihat Ucapan</button>
@@ -169,10 +170,10 @@
     <div class="modal-content">
       <h2>For you 💖</h2>
       <p>
-  Selamat ulang tahun Wildah! 🥰 <br>
-  Semoga panjang umur, sehat selalu, bahagia terus, <br>
-  dan semua harapannya tercapai, kurang kurangin ngeyelnya <br>
-  makin rajin ibadahnya, makin makin deh pokoknya 💕✨.
+        Selamat ulang tahun Wildah! 🥰 <br>
+        Semoga panjang umur, sehat selalu, bahagia terus, <br>
+        dan semua harapannya tercapai, kurang kurangin ngeyelnya <br>
+        makin rajin ibadahnya, makin makin deh pokoknya 💕✨.
       </p>
       <button class="close" onclick="closeModal()">Tutup</button>
     </div>
@@ -209,7 +210,7 @@
       document.getElementById("myModal").style.display = "none";
     }
 
-    // Play musik setelah interaksi pertama (aturan browser)
+    // Play musik setelah interaksi pertama
     document.body.addEventListener("click", () => {
       const music = document.getElementById("bg-music");
       if (music.paused) {
