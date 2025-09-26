@@ -10,6 +10,7 @@
       margin: 0;
       height: 100vh;
       display: flex;
+      flex-direction: column; /* isi body tersusun vertikal */
       justify-content: center;
       align-items: center;
       text-align: center;
@@ -31,15 +32,17 @@
       z-index: 2;
       position: relative;
       display: flex;
-      flex-direction: column; /* susun isi ke bawah */
+      flex-direction: column; /* isi container ke bawah */
       align-items: center;
       justify-content: center;
+      text-align: center;
     }
 
     .slideshow {
       position: relative;
       width: 320px;
       height: 320px;
+      margin: 0 auto;
       border-radius: 20px;
       overflow: hidden;
       box-shadow: 0 10px 25px rgba(0,0,0,0.4);
@@ -147,23 +150,15 @@
 </head>
 <body>
   <div class="container">
-    <!-- Slideshow -->
     <div class="slideshow">
-      <img src="img/foto1.jpg" class="active">
-      <img src="img/foto2.jpg">
-      <img src="img/foto3.jpg">
-      <img src="img/foto4.jpg">
-      <img src="img/foto5.jpg">
+      <img src="foto1.jpg" class="active">
+      <img src="foto2.jpg">
+      <img src="foto3.jpg">
+      <img src="foto4.jpg">
     </div>
-
-    <!-- Title -->
     <h1>🎂 HAPPY BIRTHDAY WILDAH 🥳</h1>
-
-    <!-- Button -->
     <button onclick="openModal()">💌 Lihat Ucapan</button>
-
-    <!-- Music -->
-    <audio id="bg-music" autoplay loop>
+    <audio id="bg-music" loop>
       <source src="music/lagu.mp3" type="audio/mpeg">
       Browser tidak mendukung audio.
     </audio>
@@ -172,10 +167,11 @@
   <!-- Modal -->
   <div id="myModal" class="modal">
     <div class="modal-content">
-      <h2>Untukmu 💖</h2>
+      <h2>For you 💖</h2>
       <p>Selamat ulang tahun Wildah! 🥰  
          Semoga panjang umur, sehat selalu, bahagia terus,  
-         dan semua harapannya tercapai 💕✨.</p>
+         dan semua harapannya tercapai,kurang kurangin ngeyelnya
+         makin rajin ibadahnya,makin makin deh pokoknya 💕✨.</p>
       <button class="close" onclick="closeModal()">Tutup</button>
     </div>
   </div>
@@ -210,6 +206,14 @@
     function closeModal() {
       document.getElementById("myModal").style.display = "none";
     }
+
+    // Play musik setelah interaksi pertama (aturan browser)
+    document.body.addEventListener("click", () => {
+      const music = document.getElementById("bg-music");
+      if (music.paused) {
+        music.play();
+      }
+    }, { once: true });
   </script>
 </body>
 </html>
