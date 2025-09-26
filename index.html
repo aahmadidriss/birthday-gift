@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Happy Birthday!!!! 🎉</title>
+  <title>Happy Birthday 🎉</title>
   <style>
     body {
       margin: 0;
@@ -12,30 +12,25 @@
       justify-content: center;
       align-items: center;
       background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      overflow: hidden;
       font-family: 'Comic Sans MS', cursive, sans-serif;
+      overflow: hidden;
     }
     .container {
       text-align: center;
-      position: relative;
       z-index: 2;
     }
-    img {
-      max-width: 280px;
-      max-height: 280px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-      animation: bounce 2s infinite, rotate 10s infinite linear;
-    }
+
     h1 {
-      margin-top: 20px;
+      margin: 20px 0;
       color: #fff;
       font-size: 2rem;
       text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493, 0 0 40px #ff69b4;
       animation: glow 2s ease-in-out infinite alternate;
     }
+
+    /* Tombol */
     button {
-      margin-top: 20px;
+      margin-top: 15px;
       padding: 12px 25px;
       font-size: 1rem;
       font-weight: bold;
@@ -47,34 +42,43 @@
       box-shadow: 0 5px 15px rgba(0,0,0,0.3);
       transition: transform 0.2s;
     }
-    button:hover {
-      transform: scale(1.1);
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
-    }
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+    button:hover { transform: scale(1.1); }
+
     @keyframes glow {
       from { text-shadow: 0 0 5px #fff, 0 0 10px #ff69b4, 0 0 20px #ff1493; }
       to { text-shadow: 0 0 20px #fff, 0 0 40px #ff69b4, 0 0 60px #ff1493; }
     }
-    audio {
-      display: none;
-    }
 
-    /* Modal Popup */
+    audio { display: none; }
+
+    /* Slideshow */
+    .slideshow {
+      position: relative;
+      width: 320px;
+      height: 220px;
+      margin: 0 auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    .slideshow img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: contain; /* gambar penuh tanpa terpotong */
+      background: #fff;
+      opacity: 0;
+      transition: opacity 0.7s ease-in-out;
+    }
+    .slideshow img.active { opacity: 1; }
+
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
       z-index: 10;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
       background: rgba(0,0,0,0.6);
       backdrop-filter: blur(5px);
       justify-content: center;
@@ -82,14 +86,14 @@
     }
     .modal-content {
       background: white;
-      padding: 30px;
+      padding: 25px;
       border-radius: 15px;
       text-align: center;
       max-width: 400px;
       animation: fadeIn 0.5s ease-in-out;
     }
     .modal-content h2 {
-      margin: 0 0 15px;
+      margin: 0 0 10px;
       color: #ff1493;
     }
     .modal-content p {
@@ -139,12 +143,16 @@
 </head>
 <body>
   <div class="container">
-    <img src="foto.jpg" alt="Foto Spesial">
+    <div id="slideshow" class="slideshow">
+      <img src="img/foto1.jpg" class="active" alt="Foto 1">
+      <img src="img/foto2.jpg" alt="Foto 2">
+      <img src="img/foto3.jpg" alt="Foto 3">
+      <img src="img/foto4.jpg" alt="Foto 4">
+    </div>
     <h1>HAPPY BIRTHDAYY WILDAH 🥳</h1>
     <button onclick="openModal()">💌 Lihat Ucapan</button>
-    <audio autoplay loop>
-      <source src="lagu.mp3" type="audio/mpeg">
-      Browser tidak mendukung audio.
+    <audio id="bg-music" loop>
+      <source src="music/lagu.mp3" type="audio/mpeg">
     </audio>
   </div>
 
@@ -159,21 +167,24 @@
     </div>
   </div>
 
-  <!-- Balon random -->
+  <!-- Script -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
-    function createBalloon() {
-      const balloon = document.createElement("div");
-      balloon.classList.add("balloon");
-      balloon.style.left = Math.random() * 100 + "vw";
-      balloon.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
-      balloon.style.animationDuration = 6 + Math.random() * 5 + "s";
-      document.body.appendChild(balloon);
+    const slides = document.querySelectorAll("#slideshow img");
+    let current = 0;
 
-      setTimeout(() => {
-        balloon.remove();
-      }, 11000);
-    }
-    setInterval(createBalloon, 1500);
+    // ganti foto tiap klik layar
+    document.body.addEventListener("click", () => {
+      slides[current].classList.remove("active");
+      current = (current + 1) % slides.length;
+      slides[current].classList.add("active");
+    });
+
+    // musik play setelah interaksi pertama
+    document.body.addEventListener("click", () => {
+      const music = document.getElementById("bg-music");
+      if (music.paused) music.play();
+    }, { once: true });
 
     // Modal
     function openModal() {
@@ -182,11 +193,20 @@
     function closeModal() {
       document.getElementById("myModal").style.display = "none";
     }
-  </script>
 
-  <!-- Confetti -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  <script>
+    // Balon
+    function createBalloon() {
+      const balloon = document.createElement("div");
+      balloon.classList.add("balloon");
+      balloon.style.left = Math.random() * 100 + "vw";
+      balloon.style.background = `hsl(${Math.random() * 360}, 70%, 60%)`;
+      balloon.style.animationDuration = 6 + Math.random() * 5 + "s";
+      document.body.appendChild(balloon);
+      setTimeout(() => balloon.remove(), 11000);
+    }
+    setInterval(createBalloon, 1500);
+
+    // Confetti
     function randomConfetti() {
       confetti({
         particleCount: 120,
