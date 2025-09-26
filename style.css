@@ -2,18 +2,21 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+  background: linear-gradient(135deg, #f6d365, #fda085);
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
   text-align: center;
+  color: #fff;
 }
 
 .container {
-  max-width: 800px;
+  max-width: 700px;
   padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 h1 {
@@ -24,17 +27,17 @@ h1 {
 
 .subtitle {
   font-size: 1.2rem;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .slideshow {
   position: relative;
   width: 100%;
-  max-width: 600px;
-  height: 350px;
+  max-width: 400px;
+  height: 250px;
   margin: 0 auto 20px;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
@@ -52,7 +55,8 @@ h1 {
 }
 
 .note {
-  margin-top: 20px;
   font-size: 1rem;
   font-style: italic;
+  margin-top: 10px;
+  opacity: 0.9;
 }
